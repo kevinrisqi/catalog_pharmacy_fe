@@ -164,7 +164,7 @@ class HomeView extends StatelessWidget {
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
-                  childAspectRatio: 0.75,
+                  childAspectRatio: 0.70,
                 ),
                 itemCount: controller.product.length,
                 itemBuilder: (context, index) {

@@ -64479,7 +64479,7 @@ s=this.b
 return s*(B.f.fh(a-1,this.a)+1)-(s-this.d)}}
 A.aeB.prototype={}
 A.aeC.prototype={
-Il(a){var s=Math.max(0,a.w-16)/2,r=s/0.75
+Il(a){var s=Math.max(0,a.w-16)/2,r=s/0.7
 return new A.aeF(2,r+16,s+16,r,s,A.Yr(a.x))}}
 A.uf.prototype={
 k(a){return"crossAxisOffset="+A.h(this.w)+"; "+this.ZQ(0)}}
