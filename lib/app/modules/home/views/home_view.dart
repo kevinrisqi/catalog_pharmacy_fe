@@ -109,6 +109,7 @@ class HomeView extends StatelessWidget {
             SizedBox(
               height: 50,
               child: TabBar(
+                isScrollable: true,
                 controller: controller.tabController,
                 indicatorColor: AppColors.primaryColor,
                 labelColor: AppColors.primaryColor,
@@ -169,244 +170,251 @@ class HomeView extends StatelessWidget {
                 itemCount: controller.product.length,
                 itemBuilder: (context, index) {
                   var item = controller.product[index];
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Colors.grey.withOpacity(0.2),
+                  return IntrinsicHeight(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: Colors.grey.withOpacity(0.2),
+                        ),
                       ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        if (item.imageUrl != null)
-                          Center(
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 12),
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(200),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(200),
-                                child: CachedNetworkImage(
-                                  width: 85,
-                                  height: 85,
-                                  imageUrl: item.imageUrl!,
-                                  fit: BoxFit.cover,
-                                  placeholder: (context, url) {
-                                    return const Center(
-                                        child: CircularProgressIndicator());
-                                  },
-                                  errorWidget: (context, url, error) {
-                                    return const Icon(Icons.error);
-                                  },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          if (item.imageUrl != null)
+                            Center(
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 12),
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(200),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(200),
+                                  child: CachedNetworkImage(
+                                    width: 85,
+                                    height: 85,
+                                    imageUrl: item.imageUrl!,
+                                    fit: BoxFit.cover,
+                                    placeholder: (context, url) {
+                                      return const Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                    errorWidget: (context, url, error) {
+                                      return const Icon(Icons.error);
+                                    },
+                                  ),
                                 ),
                               ),
                             ),
+                          const SizedBox(
+                            height: 12,
                           ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item.name ?? '-',
-                                style: GoogleFonts.quicksand(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(
-                                height: 4,
-                              ),
-                              Text(
-                                item.category ?? '-',
-                                style: GoogleFonts.quicksand(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    NumberFormat.currency(
-                                            locale: 'id_ID',
-                                            decimalDigits: 0,
-                                            symbol: 'Rp. ')
-                                        .format(item.price),
-                                    style: GoogleFonts.quicksand(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item.name ?? '-',
+                                  style: GoogleFonts.quicksand(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
                                   ),
-                                  const Spacer(),
-                                  InkWell(
-                                    onTap: () {
-                                      DialogService.showGeneralDrawer(
-                                        color: Colors.white,
-                                        content: Padding(
-                                          padding: const EdgeInsets.all(16),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  const Icon(Icons.close),
-                                                  const SizedBox(
-                                                    width: 12,
-                                                  ),
-                                                  Text(
-                                                    'Detail Product',
-                                                    style:
-                                                        GoogleFonts.quicksand(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w700,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                Text(
+                                  item.category ?? '-',
+                                  style: GoogleFonts.quicksand(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      NumberFormat.currency(
+                                              locale: 'id_ID',
+                                              decimalDigits: 0,
+                                              symbol: 'Rp. ')
+                                          .format(item.price),
+                                      style: GoogleFonts.quicksand(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    InkWell(
+                                      onTap: () {
+                                        DialogService.showGeneralDrawer(
+                                          color: Colors.white,
+                                          content: Padding(
+                                            padding: const EdgeInsets.all(16),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    const Icon(Icons.close),
+                                                    const SizedBox(
+                                                      width: 12,
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(
-                                                height: 24,
-                                              ),
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12),
-                                                    child: CachedNetworkImage(
-                                                      imageUrl: item.imageUrl!,
-                                                      width: 75,
-                                                      height: 75,
-                                                      fit: BoxFit.cover,
+                                                    Text(
+                                                      'Detail Product',
+                                                      style:
+                                                          GoogleFonts.quicksand(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  const SizedBox(
-                                                    width: 8,
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        item.name ?? '',
-                                                        style: GoogleFonts
-                                                            .quicksand(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        'Category: ${item.category}',
-                                                        style: GoogleFonts
-                                                            .quicksand(
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Colors.grey,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Text(
-                                                        NumberFormat.currency(
-                                                                locale: 'id_ID',
-                                                                decimalDigits:
-                                                                    0,
-                                                                symbol: 'Rp. ')
-                                                            .format(item.price),
-                                                        style: GoogleFonts
-                                                            .quicksand(
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.black,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              const Divider(),
-                                              Text(item.description ?? ''),
-                                              const SizedBox(
-                                                height: 24,
-                                              ),
-                                              SizedBox(
-                                                width: double.infinity,
-                                                height: 45,
-                                                child: ElevatedButton(
-                                                  onPressed: () async {
-                                                    Get.back();
-
-                                                    try {
-                                                      /// * Send message to whatsapp
-                                                      await launch(
-                                                          'https://wa.me/6287777063035?text=I%20want%20to%20order%20${item.name}');
-                                                    } catch (e) {
-                                                      rethrow;
-                                                    }
-                                                  },
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    backgroundColor:
-                                                        AppColors.primaryColor,
-                                                    shape:
-                                                        RoundedRectangleBorder(
+                                                  ],
+                                                ),
+                                                const SizedBox(
+                                                  height: 24,
+                                                ),
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    ClipRRect(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               12),
+                                                      child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            item.imageUrl!,
+                                                        width: 75,
+                                                        height: 75,
+                                                        fit: BoxFit.cover,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  child:
-                                                      const Text('Order Now'),
+                                                    const SizedBox(
+                                                      width: 8,
+                                                    ),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          item.name ?? '',
+                                                          style: GoogleFonts
+                                                              .quicksand(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          'Category: ${item.category}',
+                                                          style: GoogleFonts
+                                                              .quicksand(
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 8,
+                                                        ),
+                                                        Text(
+                                                          NumberFormat.currency(
+                                                                  locale:
+                                                                      'id_ID',
+                                                                  decimalDigits:
+                                                                      0,
+                                                                  symbol:
+                                                                      'Rp. ')
+                                                              .format(
+                                                                  item.price),
+                                                          style: GoogleFonts
+                                                              .quicksand(
+                                                            fontSize: 13,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
                                                 ),
-                                              ),
-                                            ],
+                                                const Divider(),
+                                                Text(item.description ?? ''),
+                                                const SizedBox(
+                                                  height: 24,
+                                                ),
+                                                SizedBox(
+                                                  width: double.infinity,
+                                                  height: 45,
+                                                  child: ElevatedButton(
+                                                    onPressed: () async {
+                                                      Get.back();
+
+                                                      try {
+                                                        /// * Send message to whatsapp
+                                                        await launch(
+                                                            'https://wa.me/6287777063035?text=I%20want%20to%20order%20${item.name}');
+                                                      } catch (e) {
+                                                        rethrow;
+                                                      }
+                                                    },
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      backgroundColor: AppColors
+                                                          .primaryColor,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12),
+                                                      ),
+                                                    ),
+                                                    child:
+                                                        const Text('Order Now'),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
+                                        );
+                                      },
+                                      child: Container(
+                                        width: 35,
+                                        height: 35,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.primaryColor,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         ),
-                                      );
-                                    },
-                                    child: Container(
-                                      width: 35,
-                                      height: 35,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.primaryColor,
-                                        borderRadius: BorderRadius.circular(10),
+                                        child: const Icon(
+                                          Icons.add_shopping_cart,
+                                          color: Colors.white,
+                                          size: 18,
+                                        ),
                                       ),
-                                      child: const Icon(
-                                        Icons.add_shopping_cart,
-                                        color: Colors.white,
-                                        size: 18,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ],
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },
