@@ -110,7 +110,7 @@ class HomeView extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 50,
+              height: 40,
               child: TabBar(
                 isScrollable: true,
                 controller: controller.tabController,
@@ -239,6 +239,7 @@ class HomeView extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                     color: Colors.grey,
                                   ),
+                                  maxLines: 1,
                                 ),
                                 const SizedBox(
                                   height: 8,
@@ -320,6 +321,9 @@ class HomeView extends StatelessWidget {
                                                             fontWeight:
                                                                 FontWeight.w700,
                                                           ),
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                         ),
                                                         Text(
                                                           'Category: ${item.category}',
