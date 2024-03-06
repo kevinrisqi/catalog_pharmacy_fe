@@ -30,7 +30,20 @@ migrate_working_dir/
 .packages
 .pub-cache/
 .pub/
-/build/
+/build/app
+/build/kotlin
+/build/cloud_firestore
+/build/firebase_core
+/build/firebase_storage
+/build/flutter_assets
+/build/flutter_image_compress_common
+/build/sqflite
+/build/path_provider_android
+/build/image_picker_android
+/build/flutter_plugin_android_lifecycle
+/build/url_launcher_android
+/build/44514c58008f71d805b9080cd7cc5346
+
 
 # Symbolication related
 app.*.symbols
