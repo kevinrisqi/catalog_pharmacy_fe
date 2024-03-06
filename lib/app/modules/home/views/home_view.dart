@@ -60,48 +60,51 @@ class HomeView extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(20),
-              child: TextField(
-                controller: controller.searchProductC,
-                onChanged: (value) {
-                  controller.searchQuery.value = value;
-                  controller.update();
-                },
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  hintStyle: TextStyle(
-                    color: AppColors.primaryColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  prefixIcon: const Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
+              child: SizedBox(
+                height: 55,
+                child: TextField(
+                  controller: controller.searchProductC,
+                  onChanged: (value) {
+                    controller.searchQuery.value = value;
+                    controller.update();
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    hintStyle: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
                     ),
-                  ),
-                  suffixIcon: InkWell(
-                    onTap: () {
-                      controller.searchProductC.clear();
-                      controller.searchQuery.value = '';
-                      controller.update();
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 8),
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryColor,
-                        borderRadius: BorderRadius.circular(22),
-                      ),
-                      child: const Icon(
-                        Icons.close,
-                        size: 16,
-                        color: Colors.white,
+                    prefixIcon: const Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
                       ),
                     ),
-                  ),
-                  suffixIconConstraints: const BoxConstraints(
-                    minWidth: 22,
-                    minHeight: 16,
+                    suffixIcon: InkWell(
+                      onTap: () {
+                        controller.searchProductC.clear();
+                        controller.searchQuery.value = '';
+                        controller.update();
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 8),
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(22),
+                        ),
+                        child: const Icon(
+                          Icons.close,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    suffixIconConstraints: const BoxConstraints(
+                      minWidth: 22,
+                      minHeight: 16,
+                    ),
                   ),
                 ),
               ),
@@ -165,7 +168,7 @@ class HomeView extends StatelessWidget {
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
-                  childAspectRatio: 0.50,
+                  childAspectRatio: 0.65,
                 ),
                 itemCount: controller.product.length,
                 itemBuilder: (context, index) {
